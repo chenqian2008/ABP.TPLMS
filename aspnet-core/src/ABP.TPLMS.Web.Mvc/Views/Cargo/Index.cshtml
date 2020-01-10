@@ -1,0 +1,186 @@
+﻿@using ABP.TPLMS.Web.Startup
+@{
+
+    ViewData["Title"] = PageNames.Cargo;
+}
+
+@section scripts
+    {
+    <script src="~/view-resources/Views/Cargo/cargomgr.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        $(function () {
+            initable();
+            init();
+            reloaded();
+            updCargoInfo();
+            showCargoDialog();
+            deleteCargo();
+        });
+    </script>
+}
+<div data-options="region:'center'" style="overflow: hidden;">
+    <div id="containter" style="width: 1000px; height: auto; margin: 0px auto;">
+        <!--toolbar-->
+        <div style="margin-bottom:1px;font-weight:bold;">
+            <a href="#" id="add" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:100px; height:30px; ">添加</a>
+            <a href="#" id="del" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" style="width:100px; height:30px; ">删除</a>
+            <a href="#" id="edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" style="width:100px; height:30px; ">修改</a>
+            <a href="#" id="reload" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height:30px; ">刷新</a>
+        </div>
+        <div id="dg-button">
+            <form name="searchform" method="post" action="" id="searchform">
+                <label for="Name">货物名称：</label>
+                <input name="Name" id="Name" class="easyui-validatebox" data-options="width:200" />
+                <label for="Code">货物代码：</label>
+                <input name="Code" id="Code" class="easyui-validatebox" data-options="width:150" />
+                <label for="HsCode">商品编码：</label>
+                <input name="HsCode" id="HsCode" class="easyui-validatebox" data-options="width:100" />
+                <a href="#" id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="Search()">查询</a>
+            </form>
+        </div>
+        <!--panel-->
+        <div data-options="region:'center',split:false" style="height:500px;">
+            <!--表格-->
+
+            <table id="dgCargo"></table>
+
+        </div>
+
+    </div>
+</div>
+<!---------------------------新增修改货物信息---------------------------->
+
+<div id="divAddUpdCargo" class="easyui-dialog" closed="true" data-options="buttons: '#dlg-buttons'">
+
+    <table>
+        <tr>
+            <td><input type="hidden" name="ID" id="IDUpdate" /></td>
+
+        </tr>
+        <tr>
+            <td>供应商：</td>
+            <td>
+                <input type="text" id="SupplierIdUpdate" name="USupplierId" class="form-control input-sm" value=@ViewData["SupplierId"].ToString() />
+
+            </td>
+            <td> 货物代码：</td>
+            <td><input type="text" id="UpdCargoCode" name="UCargoCode" class="form-control input-sm" /></td>
+            <td>货物名称：</td>
+            <td>
+                <input type="text" id="CargoNameUpdate" name="UCargoName" class="form-control input-sm" />
+            </td>
+        </tr>
+        <tr>
+            <td>品牌：</td>
+            <td>
+                <input type="text" id="BrandUpdate" name="UBrand" class="form-control input-sm" />
+
+            </td>
+            <td> 规格型号：</td>
+            <td colspan="3"><input type="text" id="SpcfUpdate" name="USpcf" class="form-control input-sm" /></td>
+        </tr>
+        <tr>
+            <td>HSCode：</td>
+            <td>
+                <input type="text" id="HSCodeUpdate" name="UHSCode" class="form-control input-sm" />
+
+            </td>
+            <td>单价：</td>
+            <td>
+                <input type="number" id="PriceUpdate" name="UPrice" class="form-control input-sm" />
+
+            </td>
+            <td> 计量单位：</td>
+            <td><input type="text" id="UnitUpdate" name="UUnit" class="form-control input-sm" /></td>
+
+        </tr>
+        <tr>
+            <td>货币：</td>
+            <td>
+                <input type="text" id="CurrUpdate" name="UCurr" class="form-control input-sm" />
+            </td>
+            <td>包装：</td>
+            <td>
+                <input type="text" id="PackageUpdate" name="UPackage" class="form-control input-sm" />
+            </td>
+            <td>体积：</td>
+            <td>
+                <div class="input-group">
+                    <input type="text" id="VolUpdate" name="UVol" class="form-control input-sm" readonly />
+                    <span class="input-group-addon" id="basic-addon2">立方米</span>
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td> 长：</td>
+            <td>
+
+                <div class="input-group">
+                    <input type="number" id="LengthUpdate" name="ULength" class="form-control input-sm" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon2">cm *</span>
+                </div>
+            </td>
+            <td>宽：</td>
+            <td>
+                <div class="input-group">
+
+                    <input type="number" id="WidthUpdate" name="UWidth" class="form-control input-sm" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon2">cm * </span>
+
+                </div>
+            </td>
+            <td>高：</td>
+            <td>
+                <div class="input-group">
+                    <input type="number" id="HeightUpdate" name="UHeight" class="form-control input-sm" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon2">cm</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>毛重：</td>
+            <td>
+                <input type="number" id="GrossWtUpdate" name="UGrossWt" class="form-control input-sm" />
+            </td>
+            <td> 净重：</td>
+            <td><input type="number" id="NetWtUpdate" name="UNetWt" class="form-control input-sm" /></td>
+
+            <td>国家：</td>
+            <td>
+                <input type="text" id="CountryUpdate" name="UCountry" class="form-control input-sm" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>安全库存：</td>
+
+            <td>
+                <input type="number" id="MinNumUpdate" name="UMinNum" class="form-control input-sm" />
+
+            </td>
+            <td> 最大库存：</td>
+
+            <td><input type="number" id="MaxNumUpdate" name="UMaxNum" class="form-control input-sm" /></td>
+
+            <td>创建时间：</td>
+            <td>
+                <input type="text" id="CreateTimeUpdate" name="UCreateTimey" class="form-control input-sm" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>备注：</td>
+
+            <td colspan="5">
+                <input type="text" id="RemarkUpdate" name="URemark" class="form-control input-sm" />
+
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="dlg-buttons">
+    <input type="submit" id="btnSave" value="保存" class="btn btn-primary" />
+    <input type="submit" id="btnCancle" value="取消" class="btn btn-info" />
+</div>

@@ -1,0 +1,121 @@
+﻿@using ABP.TPLMS.Web.Models.Common.Modals
+@model ABP.TPLMS.Web.Models.Supplier.EditSupplierModalViewModel
+
+@{
+
+    Layout = null;
+
+}
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditSupplier")))
+
+<div class="modal-body">
+    <form name="SupplierEditForm" role="form" novalidate class="form-validation">
+        <input type="hidden" name="Id" value="@Model.Supplier.Id" />
+
+        <div>
+            <div class="row clearfix">
+
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <label for="Code" class="form-label">@L("Code")</label>
+                            <input id="Code" type="text" name="Code" value="@Model.Supplier.Code" required maxlength="50" minlength="2" class="validate form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <label for="Name" class="form-label">@L("Name")</label>
+                            <input id="Name" type="text" name="Name" value="@Model.Supplier.Name" required maxlength="50" minlength="2" class="validate form-control">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12">
+                    <div class="form-group form-float">
+
+                        <div class="form-line">
+                            <label for="Address" class="form-label">@L("Address")</label>
+                            <input id="Address" type="text" name="Address" value="@Model.Supplier.Address" required maxlength="50" minlength="2" class="validate form-control">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <label for="LinkName" class="form-label">@L("LinkName")</label>
+                            <input id="LinkName" type="text" name="LinkName" value="@Model.Supplier.LinkName" required maxlength="50" minlength="2" class="validate form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <label for="Mobile" class="form-label">@L("Mobile")</label>
+                            <input id="Mobile" type="text" name="Mobile" value="@Model.Supplier.Mobile" required maxlength="50" minlength="2" class="validate form-control">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <label for="Tel" class="form-label">@L("Tel")</label>
+                            <input id="Tel" type="text" name="Tel" value="@Model.Supplier.Tel" required maxlength="50" minlength="2" class="validate form-control">
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group form-float">
+
+                        <div class="form-line">
+                            <label for="Status" class="form-label">@L("Status")</label>
+                            <input id="Status" type="text" name="Status" value="@Model.Supplier.Status" required maxlength="50" minlength="1" class="validate form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+
+                <div class="col-sm-6">
+                    <div class="form-line">
+                        <label for="Sex" class="form-label">@L("Sex")</label>
+                        <input id="Sex" type="text" name="Sex" class="form-control" value="@Model.Supplier.Sex">
+
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-line">
+                        <label for="Email" class="form-label">@L("Email")</label>
+                        <input id="Email" type="text" name="Email" class="form-control" value="@Model.Supplier.Email">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+
+<script src="~/view-resources/Views/Supplier/_EditSupplierModal.js" asp-append-version="true"></script>

@@ -1,0 +1,93 @@
+﻿@using ABP.TPLMS.Web.Startup
+@model ABP.TPLMS.Web.Models.Module.EditModuleModalViewModel
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>创建模块</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Module.Name" class="control-label"></label>
+                <input asp-for="@Model.Module.Name" class="form-control" />
+                <span asp-validation-for="@Model.Module.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Module.DisplayName" class="control-label"></label>
+
+                <input asp-for="@Model.Module.DisplayName" class="form-control" />
+                <span asp-validation-for="@Model.Module.DisplayName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Module.Url" class="control-label"></label>
+                <input asp-for="@Model.Module.Url" class="form-control" />
+
+                <span asp-validation-for="@Model.Module.Url" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Module.HotKey" class="control-label"></label>
+                <input asp-for="@Model.Module.HotKey" class="form-control" />
+
+                <span asp-validation-for="@Model.Module.HotKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Module.IconName" class="control-label"></label>
+                <input asp-for="@Model.Module.IconName" class="form-control" />
+                <span asp-validation-for="@Model.Module.IconName" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Module.RequiredPermissionName" class="control-label"></label>
+                <input asp-for="@Model.Module.RequiredPermissionName" class="form-control" />
+                <span asp-validation-for="@Model.Module.RequiredPermissionName" class="text-danger"></span>
+
+            </div>
+
+            <div class="row clearfix">
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="@Model.Module.RequiresAuthentication"></label>
+                        <input asp-for="@Model.Module.RequiresAuthentication" type="checkbox" class="filled-in" checked />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Module.ParentName" class="control-label"></label>
+                <input asp-for="@Model.Module.ParentName" class="form-control" value="根目录" />
+                <span asp-validation-for="@Model.Module.ParentName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.Module.Status" class="control-label"></label>
+
+                <input asp-for="@Model.Module.Status" class="form-control" />
+                <span asp-validation-for="@Model.Module.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Module.SortNo" class="control-label"></label>
+                <input asp-for="@Model.Module.SortNo" class="form-control" />
+                <span asp-validation-for="@Model.Module.SortNo" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

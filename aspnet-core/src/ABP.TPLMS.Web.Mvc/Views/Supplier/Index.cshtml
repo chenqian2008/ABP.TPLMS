@@ -1,0 +1,291 @@
+﻿@using ABP.TPLMS.Web.Startup
+@model ABP.TPLMS.Web.Models.Supplier.SupplierListViewModel
+
+@{
+    ViewData["Title"] = PageNames.Supplier;
+}
+
+@section scripts
+{
+
+    <script src="~/view-resources/Views/Supplier/Index.js" asp-append-version="true"></script>
+}
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+        <div class="card">
+            <div class="header">
+                <h2>
+                    @L("Supplier")
+
+                </h2>
+
+                <button type="button" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" data-toggle="modal"
+                        data-target="#SupplierCreateModal">
+
+                    <i class="material-icons">add</i>
+
+                </button>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">
+
+                            <i class="material-icons">more_vert</i>
+
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+
+                            <li>
+                                <a id="RefreshButton" href="javascript:void(0);" class="waves-effect waves-block">
+                                    <i class="material-icons">refresh</i>@L("Refresh")
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="body table-responsive">
+
+                <table class="table">
+
+                    <thead>
+                        <tr>
+
+                            <th>
+
+                                @Html.DisplayNameFor(model => model.Supplier.Code)
+
+                            </th>
+                            <th>
+
+                                @Html.DisplayNameFor(model => model.Supplier.Name)
+
+                            </th>
+                            <th>
+
+                                @Html.DisplayNameFor(model => model.Supplier.LinkName)
+
+                            </th>
+                            <th>
+
+                                @Html.DisplayNameFor(model => model.Supplier.Mobile)
+
+                            </th>
+                            <th>
+
+                                @Html.DisplayNameFor(model => model.Supplier.Address)
+
+                            </th>
+                            <th>
+
+                                @Html.DisplayNameFor(model => model.Supplier.Tel)
+
+                            </th>
+                            <th>
+
+                                @Html.DisplayNameFor(model => model.Supplier.Status)
+
+                            </th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model.Suppliers)
+                        {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Code)
+
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LinkName)
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Mobile)
+
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tel)
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+
+                                </td>
+                                <td class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">menu</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+
+                                        <li>
+                                            <a href="#" class="waves-effect waves-block edit-supplier" data-supplier-id="@item.Id" data-toggle="modal"
+                                               data-target="#SupplierEditModal"><i class="material-icons">edit</i>@L("Edit")</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="waves-effect waves-block delete-supplier" data-supplier-id="@item.Id" data-module-name="@item.Name">
+                                                <i class="material-icons">delete_sweep</i>@L("Delete")
+                                            </a>
+                                        </li>
+
+                                    </ul>
+
+                                </td>
+
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="SupplierCreateModal" tabindex="-1" role="dialog"
+         aria-labelledby="SupplierCreateModalLabel" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span>@L("CreateNewSupplier")</span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form name="SupplierCreateForm" role="form" class="form-validation">
+                        <div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+
+                                            <label asp-for="@Model.Supplier.Code" class="form-label"></label>
+                                            <input type="text" name="Code" class="form-control" required maxlength="50" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label asp-for="@Model.Supplier.Name" class="form-label"></label>
+                                            <input type="text" name="Name" class="form-control" required maxlength="50" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+
+                                <div class="col-sm-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label asp-for="@Model.Supplier.Address" class="form-label"></label>
+                                            <input type="text" name="Address" class="form-control" required maxlength="255" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label asp-for="@Model.Supplier.LinkName" class="form-label"></label>
+
+                                            <input type="text" name="LinkName" class="form-control" />
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label asp-for="@Model.Supplier.Mobile" class="form-label"></label>
+
+                                            <input type="text" name="Mobile" class="form-control" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label asp-for="@Model.Supplier.Tel" class="form-label"></label>
+                                            <input type="text" name="Tel" class="form-control" required maxlength="255" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label asp-for="@Model.Supplier.Status" class="form-label"></label>
+
+                                            <input type="text" name="Status" class="form-control" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-line">
+                                        <label asp-for="@Model.Supplier.Sex"></label>
+                                        <input name="Sex" type="text" class="form-control" />
+
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-line">
+                                        <label asp-for="@Model.Supplier.Email"></label>
+                                        <input name="Email" type="text" class="form-control" />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">@L("Cancel")</button>
+                            <button type="submit" class="btn btn-primary waves-effect">@L("Save")</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="SupplierEditModal" tabindex="-1" role="dialog" aria-labelledby="SupplierEditModalLabel" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
