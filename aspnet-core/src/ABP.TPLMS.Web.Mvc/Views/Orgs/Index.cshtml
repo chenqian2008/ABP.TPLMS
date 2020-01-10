@@ -1,0 +1,147 @@
+﻿@using ABP.TPLMS.Web.Startup
+
+@{
+    ViewData["Title"] = PageNames.Org;
+}
+
+@section scripts
+    {
+
+    <script src="~/view-resources/Views/Orgs/Index.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        // var editFlag = undefined;
+
+        $(function () {
+            initable();
+            reloaded();
+            showOrgDialog();
+        });
+    </script>
+
+}
+
+
+<div data-options="region:'center'" style="overflow: hidden;">
+
+    <div id="containter" style="width: 1000px; height: auto; margin: 0px auto;">
+        <!--toolbar-->
+        <div style="margin-bottom:1px;font-weight:bold;">
+            <a href="#" id="add" class="easyui-linkbutton" data-options="iconCls:'icon-add'" 
+               style="width:100px; height:30px; ">添加</a>
+            <a href="#" id="del" class="easyui-linkbutton" data-options="iconCls:'icon-remove'"
+               style="width:100px; height:30px; ">删除</a>
+            <a href="#" id="edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit'"
+               style="width:100px; height:30px; ">修改</a>
+            <a href="#" id="reload" class="easyui-linkbutton" data-options="iconCls:'icon-reload'"
+               style="width:100px; height:30px; ">刷新</a>
+
+        </div>
+        <!--panel-->
+        <div data-options="region:'center',split:false" style="height:500px;">
+            <!--表格-->
+            <table id="dgOrg"></table>
+        </div>
+    </div>
+
+</div>
+
+<div id="divAddUpdOrg" class="easyui-dialog" closed="true" data-options="buttons: '#dlg-buttons'">
+    <form name="OrgEditForm" role="form" novalidate class="form-validation">
+        <table>
+            <tr>
+                <td><input type="hidden" name="Id" id="IDUpdate" /></td>
+            </tr>
+            <tr>
+                <td>组织名称：</td>
+                <td>
+
+                    <input type="text" id="NameUpdate" name="Name" class="form-control input-sm" />
+                </td>
+            </tr>
+
+            <tr>
+                <td> 组织代码：</td>
+                <td><input type="text" id="UpdBizCode" name="BizCode" class="form-control input-sm" /></td>
+
+            </tr>
+            <tr>
+
+                <td>类型：</td>
+                <td>
+                    <input type="text" id="UpdType" name="Type" class="form-control input-sm" />
+                </td>
+            </tr>
+            <tr>
+
+                <td> 关区代码：</td>
+                <td><input type="text" id="UpdCustomCode" name="CustomCode" class="form-control input-sm" /></td>
+            </tr>
+            <tr>
+                <td>自动展开：</td>
+                <td>
+                    <div class="form-control input-sm">
+                        <input type="checkbox" name="IsAutoExpand" value="true" id="UpdIsAutoExpand"
+                               class="filled-in" checked />
+                        <label for="UpdIsAutoExpand"></label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>子级：</td>
+                <td>
+                    <div class="form-control input-sm">
+                        <input type="checkbox" name="IsLeaf" value="true" id="UpdIsLeaf" class="filled-in" checked />
+                        <label for="UpdIsLeaf"></label>
+                    </div>
+                </td>
+
+            </tr>
+            <tr>
+                <td>状态：</td>
+                <td>
+                    <input type="text" id="UpdStatus" name="Status" class="form-control input-sm" />
+                </td>
+            </tr>
+            <tr>
+
+                <td>上级组织：</td>
+                <td>
+                    <input id="AddTree" name="ParentName" class="easyui-combotree" />
+                </td>
+            </tr>
+            <tr>
+                <td>热键：</td>
+                <td>
+                    <input id="UpdHotKey" name="HotKey" class="form-control input-sm" />
+
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>图标：</td>
+                <td>
+                    <input id="UpdIconName" name="IconName" class="form-control input-sm" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="UpdParentId" name="ParentId" type="hidden" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>备注：</td>
+                <td>
+                    <input type="text" id="RemarkUpdate" name="URemark" class="form-control input-sm" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+<div id="dlg-buttons">
+    <input type="submit" id="btnSave" value="保存" class="btn btn-primary" />
+    <input type="submit" id="btnCancle" value="取消" class="btn btn-info" />
+</div>
