@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Abp.AspNetCore.Mvc.Authorization;
 using Abp.Web.Models;
 using ABP.TPLMS.Controllers;
+using ABP.TPLMS.Helpers;
 using ABP.TPLMS.Orgs;
 using ABP.TPLMS.Orgs.Dto;
 using ABP.TPLMS.Web.Models.Orgs;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 
 
@@ -47,7 +49,29 @@ namespace ABP.TPLMS.Web.Controllers
             var orgList = _orgAppService.GetAllAsync(paged).GetAwaiter().GetResult().Items;
             var total = _orgAppService.GetAllAsync(paged).GetAwaiter().GetResult().TotalCount; //1000;
 
-            var json = JsonEasyUI(orgList, total);
+
+            var orgListJson = JsonHelper.Instance.Serialize(orgList);
+
+            JArray orgListArrayToView = new JArray();
+            JArray orgListArray = JArray.Parse(orgListJson);
+            foreach (var orgJson in orgListArray)
+            {
+                JObject org = (JObject)orgJson;
+
+                //当是顶级组织时，_parentId为空，必须移除_parentId属性，否则treegrid不会显示。
+                if (org.ContainsKey("ParentId")
+                    && org["ParentId"].ToString() == "0"
+                    && org.ContainsKey("_parentId"))
+                {
+                    org.Remove("_parentId");
+                }
+
+                orgListArrayToView.Add(org);
+            }
+
+            var json = JsonEasyUI(orgListArrayToView, total);
+
+
             return json;
 
         }
