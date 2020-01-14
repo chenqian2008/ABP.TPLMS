@@ -49,7 +49,6 @@ namespace ABP.TPLMS.Web.Controllers
             var orgList = _orgAppService.GetAllAsync(paged).GetAwaiter().GetResult().Items;
             var total = _orgAppService.GetAllAsync(paged).GetAwaiter().GetResult().TotalCount; //1000;
 
-
             var orgListJson = JsonHelper.Instance.Serialize(orgList);
 
             JArray orgListArrayToView = new JArray();
@@ -70,7 +69,6 @@ namespace ABP.TPLMS.Web.Controllers
             }
 
             var json = JsonEasyUI(orgListArrayToView, total);
-
 
             return json;
 
