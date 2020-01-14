@@ -14,9 +14,9 @@ namespace ABP.TPLMS.Modules
 
         Task CreateAsync(CreateUpdateModuleDto input);
         Task UpdateAsync(CreateUpdateModuleDto input);
-        Task<ListResultDto<ModuleDto>> GetAllAsync();
+        Task<ListResultDto<ModuleDto>> GetAllItemAsync();
         List<Module> GetAll();
         Task DeleteAsync(int Id);
-        void Delete(int Id);
+        void DeleteByID(int Id);
     }
 }

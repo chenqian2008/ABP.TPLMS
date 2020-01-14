@@ -40,7 +40,7 @@ namespace ABP.TPLMS.Modules
             return _moduleRepository.UpdateAsync(module);
         }
 
-        public async Task<ListResultDto<ModuleDto>> GetAllAsync()
+        public async Task<ListResultDto<ModuleDto>> GetAllItemAsync()
         {
             var books = await _moduleRepository.GetAllListAsync();
 
@@ -61,7 +61,7 @@ namespace ABP.TPLMS.Modules
 
         }
 
-        public void Delete(int Id)
+        public void DeleteByID(int Id)
         {
             _moduleRepository.Delete(Id);
 

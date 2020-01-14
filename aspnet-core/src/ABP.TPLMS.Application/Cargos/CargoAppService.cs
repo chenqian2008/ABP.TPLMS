@@ -31,7 +31,7 @@ namespace ABP.TPLMS.Cargos
                  ;
         }
 
-        public string Delete(string ids)
+        public string DeleteBatch(string ids)
         {
 
             string result = "NO";

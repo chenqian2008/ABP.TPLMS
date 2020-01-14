@@ -23,7 +23,7 @@ namespace ABP.TPLMS.Web.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var output = _moduleAppService.GetAllAsync();
+            var output = _moduleAppService.GetAllItemAsync();
 
             var config = new MapperConfiguration(cfg => cfg.CreateMap<ModuleDto, CreateUpdateModuleDto>());
             var mapper = config.CreateMapper();
@@ -98,7 +98,7 @@ namespace ABP.TPLMS.Web.Controllers
         }
         private bool DtoExists(long id)
         {
-            return _moduleAppService.GetAllAsync().Result.Items.Any(e => e.Id == id);
+            return _moduleAppService.GetAllItemAsync().Result.Items.Any(e => e.Id == id);
         }
         // GET: Cargoes/Edit/5
         public IActionResult Edit(int? id)
@@ -108,7 +108,7 @@ namespace ABP.TPLMS.Web.Controllers
                 return NotFound();
             }
 
-            var module = _moduleAppService.GetAllAsync().Result.Items.SingleOrDefault(m => m.Id == id);
+            var module = _moduleAppService.GetAllItemAsync().Result.Items.SingleOrDefault(m => m.Id == id);
             if (module == null)
             {
                 return NotFound();
@@ -133,7 +133,7 @@ namespace ABP.TPLMS.Web.Controllers
                 return NotFound();
             }
 
-            var module = _moduleAppService.GetAllAsync().Result.Items.SingleOrDefault(m => m.Id == id);
+            var module = _moduleAppService.GetAllItemAsync().Result.Items.SingleOrDefault(m => m.Id == id);
 
             if (module == null)
             {

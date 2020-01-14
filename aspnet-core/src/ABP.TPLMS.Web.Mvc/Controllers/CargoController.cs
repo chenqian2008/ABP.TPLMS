@@ -142,7 +142,7 @@ namespace ABP.TPLMS.Web.Controllers
 
             try
             {
-                result = _cargoAppService.Delete(ids);
+                result = _cargoAppService.DeleteBatch(ids);
             }
             catch
             {
