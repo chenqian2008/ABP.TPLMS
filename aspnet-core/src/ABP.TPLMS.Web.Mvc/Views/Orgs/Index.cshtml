@@ -6,18 +6,18 @@
 
 @section scripts
     {
-
-    <script src="~/view-resources/Views/Orgs/Index.js" asp-append-version="true"></script>
+    <script src="~/view-resources/Views/orgs/Index.js" asp-append-version="true"></script>
     <script type="text/javascript">
-        // var editFlag = undefined;
 
         $(function () {
             initable();
             reloaded();
+            updOrgInfo();
             showOrgDialog();
+            deleteOrg();
+
         });
     </script>
-
 }
 
 
@@ -26,7 +26,7 @@
     <div id="containter" style="width: 1000px; height: auto; margin: 0px auto;">
         <!--toolbar-->
         <div style="margin-bottom:1px;font-weight:bold;">
-            <a href="#" id="add" class="easyui-linkbutton" data-options="iconCls:'icon-add'" 
+            <a href="#" id="add" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
                style="width:100px; height:30px; ">添加</a>
             <a href="#" id="del" class="easyui-linkbutton" data-options="iconCls:'icon-remove'"
                style="width:100px; height:30px; ">删除</a>
@@ -127,6 +127,9 @@
             <tr>
                 <td>
                     <input id="UpdParentId" name="ParentId" type="hidden" />
+                </td>
+                <td>
+                    <input id="UpdParentName" name="ParentName" type="hidden" />
                 </td>
             </tr>
 
